@@ -9,19 +9,25 @@ export const RegistrationForm = () => {
     const [mail, setMail] = useState(null)
     const [pass, setPass] = useState(null)
 
+    const onRegistrationHandler = () => {
+        const user = {
+            login,
+            mail,
+            password: pass
+        }
+
+        setLogin(null)
+        setMail(null)
+        setPass(null)
+
+        console.log('User: ', user)
+    }
+
     return (
         <View style={styles.container}>
         <Text style={styles.headertext}>Регистрация</Text>
 
         <View style={styles.inputContainer}>
-        {/* <TextInput style={styles.input} placeholder='Логин' />
-        <TextInput style={styles.input} placeholder='Адрес электронной почты' />
-        <View >
-        <TextInput secureTextEntry={showPass} style={[styles.input, {paddingRight: 100}]} placeholder='Пароль' />
-        <Pressable onPress={showPassToggle} style={styles.showPassBtn}>
-        <Text style={styles.showPassBtnText}>{showPass ? 'Показать' : 'Скрыть'}</Text>
-        </Pressable>
-        </View> */}
 
         <Input 
         placeholder={'Логин'} 
@@ -45,7 +51,7 @@ export const RegistrationForm = () => {
         </View>
 
         <View style={styles.footerContainer}>
-            <TouchableHighlight style={styles.acceptBtn}>
+            <TouchableHighlight style={styles.acceptBtn} onPress={onRegistrationHandler}>
                 <Text style={styles.acceptBtnText}>Зарегистрироваться</Text>
             </TouchableHighlight>
             <View style={styles.linkBlock}>

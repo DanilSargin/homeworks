@@ -8,6 +8,18 @@ export const LoginForm = () => {
     const [mail, setMail] = useState(null)
     const [pass, setPass] = useState(null)
 
+    const onLoginHandler = () => {
+        const user = {
+            mail,
+            password: pass
+        }
+
+        setMail(null)
+        setPass(null)
+
+        console.log('User: ', user)
+    }
+
     return (
         <View style={styles.container}>
         <Text style={styles.headertext}>Войти</Text>
@@ -30,12 +42,12 @@ export const LoginForm = () => {
         </View>
 
         <View style={styles.footerContainer}>
-            <TouchableHighlight style={styles.acceptBtn}>
+            <TouchableHighlight style={styles.acceptBtn} onPress={onLoginHandler}>
                 <Text style={styles.acceptBtnText}>Войти</Text>
             </TouchableHighlight>
             <View style={styles.linkBlock}>
                 <Text style={styles.linkBlockText}>Нет аккаунта? </Text>
-                <TouchableHighlight>
+                <TouchableHighlight >
                     <Text style={styles.linkBlockText}>Зарегистрироваться</Text>
                     </TouchableHighlight>
             </View>

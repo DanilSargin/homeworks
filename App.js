@@ -1,5 +1,4 @@
-import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import {  StyleSheet,  } from 'react-native';
 import { RegistrationScreen } from './Screens/RegistrationScreen';
 import { useFonts } from 'expo-font'
 import { LoginScreen } from './Screens/LoginScreen';

@@ -1,4 +1,4 @@
-import { StyleSheet, Image, View, ImageBackground, Pressable, SafeAreaView, Dimensions } from 'react-native';
+import { StyleSheet, View, ImageBackground, SafeAreaView, Dimensions } from 'react-native';
 import { LoginForm } from '../Components/LoginForm/LoginForm';
 
 

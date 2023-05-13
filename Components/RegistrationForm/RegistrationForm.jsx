@@ -14,14 +14,6 @@ export const RegistrationForm = () => {
         <Text style={styles.headertext}>Регистрация</Text>
 
         <View style={styles.inputContainer}>
-        {/* <TextInput style={styles.input} placeholder='Логин' />
-        <TextInput style={styles.input} placeholder='Адрес электронной почты' />
-        <View >
-        <TextInput secureTextEntry={showPass} style={[styles.input, {paddingRight: 100}]} placeholder='Пароль' />
-        <Pressable onPress={showPassToggle} style={styles.showPassBtn}>
-        <Text style={styles.showPassBtnText}>{showPass ? 'Показать' : 'Скрыть'}</Text>
-        </Pressable>
-        </View> */}
 
         <Input 
         placeholder={'Логин'} 

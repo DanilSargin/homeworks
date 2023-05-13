@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, ImageBackground, TextInput, Pressable, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, View,TouchableHighlight, TouchableWithoutFeedback, Keyboard, KeyboardAvoidingView, Platform } from 'react-native';
 import { Input } from '../Input/Input';
 import { useState } from 'react';
 
@@ -24,7 +24,12 @@ export const RegistrationForm = () => {
     }
 
     return (
+        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+
         <View style={styles.container}>
+
+        <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"}>
+            
         <Text style={styles.headertext}>Регистрация</Text>
 
         <View style={styles.inputContainer}>
@@ -61,8 +66,9 @@ export const RegistrationForm = () => {
                     </TouchableHighlight>
             </View>
         </View>
-
+        </KeyboardAvoidingView>
         </View>
+        </TouchableWithoutFeedback>
     )
 }
 

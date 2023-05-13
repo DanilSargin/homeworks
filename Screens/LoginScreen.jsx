@@ -1,4 +1,4 @@
-import { StyleSheet, Image, View, ImageBackground, Pressable, SafeAreaView, Dimensions } from 'react-native';
+import { StyleSheet, View, ImageBackground, SafeAreaView, Dimensions, TouchableWithoutFeedback } from 'react-native';
 import { LoginForm } from '../Components/LoginForm/LoginForm';
 
 
@@ -9,6 +9,8 @@ export const LoginScreen = () => {
 
     return (
             <SafeAreaView style={styles.container}>
+            <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+
                 <ImageBackground  resizeMode='cover' style={[styles.imageBG, {height}]} source={require('../assets/images/PhotoBG.png')}>
               
               <View style={styles.contentContainer}>
@@ -19,6 +21,7 @@ export const LoginScreen = () => {
                    
               </View>
                 </ImageBackground>
+                </TouchableWithoutFeedback>
              </SafeAreaView>
     )
 }

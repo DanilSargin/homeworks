@@ -1,4 +1,4 @@
-import { StyleSheet, Image, View, ImageBackground, Pressable, SafeAreaView, Dimensions } from 'react-native';
+import { StyleSheet, Image, View, ImageBackground, Pressable, SafeAreaView, Dimensions, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import { RegistrationForm } from '../Components/RegistrationForm/RegistrationForm';
 import { useState } from 'react';
 
@@ -12,6 +12,7 @@ export const RegistrationScreen = () => {
 
     return (
             <SafeAreaView style={styles.container}>
+              <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
                 <ImageBackground  resizeMode='cover' style={[styles.imageBG, {height}]} source={require('../assets/images/PhotoBG.png')}>
               
               <View style={styles.contentContainer}>
@@ -31,6 +32,7 @@ export const RegistrationScreen = () => {
                    
               </View>
                 </ImageBackground>
+                </TouchableWithoutFeedback>
              </SafeAreaView>
     )
 }

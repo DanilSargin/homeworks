@@ -1,14 +1,15 @@
-import { StyleSheet, Image, View, ImageBackground, Pressable } from 'react-native';
+import { StyleSheet, Image, View, ImageBackground, Pressable, SafeAreaView, Dimensions } from 'react-native';
 import { LoginForm } from '../Components/LoginForm/LoginForm';
 
 
 export const LoginScreen = () => {
 
+    const height = Dimensions.get('screen').height
 
 
     return (
-            <View style={styles.container}>
-                <ImageBackground  resizeMode='cover' style={styles.imageBG} source={require('../assets/images/PhotoBG.png')}>
+            <SafeAreaView style={styles.container}>
+                <ImageBackground  resizeMode='cover' style={[styles.imageBG, {height}]} source={require('../assets/images/PhotoBG.png')}>
               
               <View style={styles.contentContainer}>
 
@@ -18,17 +19,19 @@ export const LoginScreen = () => {
                    
               </View>
                 </ImageBackground>
-             </View>
+             </SafeAreaView>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
     },
     imageBG: {
-        flex: 1,
+        width: '100%',
         justifyContent: 'flex-end',
+        position: 'absolute',
+        resizeMode: 'cover',
       },
     contentContainer: {
         backgroundColor: '#FFFFFF',
@@ -37,21 +40,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingHorizontal: 16,
         paddingTop: 32,
-        paddingBottom: 78
+        paddingBottom: 78,
       },
-      photoContainer: {
-        width: 120,
-        height: 120,
-        borderRadius: 16,
-        backgroundColor: '#F6F6F6',
-        position: 'absolute',
-        top: -60
-      },
-      addBtn: {
-        width: 25,
-        height: 25,
-        position: 'absolute',
-        bottom: 14,
-        right: -12,
-      }
 })

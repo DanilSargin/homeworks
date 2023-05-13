@@ -15,8 +15,8 @@ export default function App() {
 
   return (
     <> 
-      {/* <RegistrationScreen/> */}
-      <LoginScreen />
+      <RegistrationScreen/>
+      {/* <LoginScreen /> */}
       {/* <Text>Open up App.js to start working on your app!</Text>
       <StatusBar style="auto" /> */}
     </>

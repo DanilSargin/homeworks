@@ -1,16 +1,18 @@
-import { StyleSheet, Image, View, ImageBackground, Pressable } from 'react-native';
+import { StyleSheet, Image, View, ImageBackground, Pressable, SafeAreaView, Dimensions } from 'react-native';
 import { RegistrationForm } from '../Components/RegistrationForm/RegistrationForm';
 import { useState } from 'react';
 
 
 export const RegistrationScreen = () => {
 
-    const [photo, setPhoto] = useState(null)
+    const [photo, setPhoto] = useState(null) // change on true, and look at photo
+
+    const height = Dimensions.get('screen').height
 
 
     return (
-            <View style={styles.container}>
-                <ImageBackground  resizeMode='cover' style={styles.imageBG} source={require('../assets/images/PhotoBG.png')}>
+            <SafeAreaView style={styles.container}>
+                <ImageBackground  resizeMode='cover' style={[styles.imageBG, {height}]} source={require('../assets/images/PhotoBG.png')}>
               
               <View style={styles.contentContainer}>
 
@@ -29,7 +31,7 @@ export const RegistrationScreen = () => {
                    
               </View>
                 </ImageBackground>
-             </View>
+             </SafeAreaView>
     )
 }
 
@@ -38,8 +40,10 @@ const styles = StyleSheet.create({
         flex: 1
     },
     imageBG: {
-        flex: 1,
+      position: 'absolute',
+      width: '100%',
         justifyContent: 'flex-end',
+        resizeMode: 'cover'
       },
     contentContainer: {
         backgroundColor: '#FFFFFF',

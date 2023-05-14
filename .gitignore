@@ -1,6 +1,7 @@
 node_modules/
 .expo/
 dist/
+assets/fonts/Roboto/LICENSE.txt
 npm-debug.*
 *.jks
 *.p8

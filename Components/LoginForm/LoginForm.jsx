@@ -6,6 +6,7 @@ import {
   TouchableWithoutFeedback,
   KeyboardAvoidingView,
   Keyboard,
+  Platform,
 } from "react-native";
 import { Input } from "../Input/Input";
 import { useCallback, useState } from "react";
@@ -24,7 +25,7 @@ export const LoginForm = () => {
     setPass(null);
 
     console.log("User: ", user);
-  }, []);
+  }, [mail, pass]);
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>

@@ -5,6 +5,8 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   useWindowDimensions,
+  KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { LoginForm } from "../Components/LoginForm/LoginForm";
@@ -15,15 +17,20 @@ export const LoginScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <ImageBackground
-          resizeMode="cover"
-          style={[styles.imageBG, { height }]}
-          source={require("../assets/images/PhotoBG.png")}
+        <KeyboardAvoidingView
+          style={{ flex: 1 }}
+          behavior={Platform.OS == "ios" ? "padding" : undefined}
         >
-          <View style={styles.contentContainer}>
-            <LoginForm />
-          </View>
-        </ImageBackground>
+          <ImageBackground
+            resizeMode="cover"
+            style={[styles.imageBG, { height }]}
+            source={require("../assets/images/PhotoBG.png")}
+          >
+            <View style={styles.contentContainer}>
+              <LoginForm />
+            </View>
+          </ImageBackground>
+        </KeyboardAvoidingView>
       </TouchableWithoutFeedback>
     </SafeAreaView>
   );

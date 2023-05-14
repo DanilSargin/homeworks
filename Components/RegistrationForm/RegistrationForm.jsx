@@ -3,8 +3,6 @@ import {
   Text,
   View,
   TouchableHighlight,
-  TouchableWithoutFeedback,
-  Keyboard,
   KeyboardAvoidingView,
   Platform,
 } from "react-native";
@@ -28,55 +26,53 @@ export const RegistrationForm = () => {
     setPass(null);
 
     console.log("User: ", user);
-  }, []);
+  }, [mail, pass, login]);
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View style={styles.container}>
-        <KeyboardAvoidingView
-          behavior={Platform.OS == "ios" ? "padding" : undefined}
-        >
-          <Text style={styles.headertext}>Регистрация</Text>
+    <View style={styles.container}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS == "ios" ? "padding" : undefined}
+      >
+        <Text style={styles.headertext}>Регистрация</Text>
 
-          <View style={styles.inputContainer}>
-            <Input
-              placeholder="Логин"
-              style={styles.input}
-              value={login}
-              onChange={setLogin}
-            />
-            <Input
-              placeholder="Адрес электронной почты"
-              style={styles.input}
-              value={mail}
-              onChange={setMail}
-            />
-            <Input
-              placeholder={"Пароль"}
-              style={styles.input}
-              value={pass}
-              onChange={setPass}
-              password
-            />
-          </View>
+        <View style={styles.inputContainer}>
+          <Input
+            placeholder="Логин"
+            style={styles.input}
+            value={login}
+            onChange={setLogin}
+          />
+          <Input
+            placeholder="Адрес электронной почты"
+            style={styles.input}
+            value={mail}
+            onChange={setMail}
+          />
+          <Input
+            placeholder={"Пароль"}
+            style={styles.input}
+            value={pass}
+            onChange={setPass}
+            password
+          />
+        </View>
 
-          <View style={styles.footerContainer}>
-            <TouchableHighlight
-              style={styles.acceptBtn}
-              onPress={onRegistrationHandler}
-            >
-              <Text style={styles.acceptBtnText}>Зарегистрироваться</Text>
+        <View style={styles.footerContainer}>
+          <TouchableHighlight
+            style={styles.acceptBtn}
+            onPress={onRegistrationHandler}
+          >
+            <Text style={styles.acceptBtnText}>Зарегистрироваться</Text>
+          </TouchableHighlight>
+          <View style={styles.linkBlock}>
+            <Text style={styles.linkBlockText}>Уже есть аккаунт? </Text>
+            <TouchableHighlight>
+              <Text style={styles.linkBlockText}>Войти</Text>
             </TouchableHighlight>
-            <View style={styles.linkBlock}>
-              <Text style={styles.linkBlockText}>Уже есть аккаунт? </Text>
-              <TouchableHighlight>
-                <Text style={styles.linkBlockText}>Войти</Text>
-              </TouchableHighlight>
-            </View>
           </View>
-        </KeyboardAvoidingView>
-      </View>
-    </TouchableWithoutFeedback>
+        </View>
+      </KeyboardAvoidingView>
+    </View>
   );
 };
 

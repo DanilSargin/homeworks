@@ -7,6 +7,8 @@ import {
   Keyboard,
   TouchableWithoutFeedback,
   useWindowDimensions,
+  KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { RegistrationForm } from "../Components/RegistrationForm/RegistrationForm";
@@ -19,31 +21,36 @@ export const RegistrationScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <ImageBackground
-          resizeMode="cover"
-          style={[styles.imageBG, { height }]}
-          source={require("../assets/images/PhotoBG.png")}
+        <KeyboardAvoidingView
+          style={{ flex: 1 }}
+          behavior={Platform.OS == "ios" ? "padding" : undefined}
         >
-          <View style={styles.contentContainer}>
-            <View style={styles.photoContainer}>
-              {photo ? (
-                <ImageBackground
-                  style={{ width: "100%", height: "100%" }}
-                  source={require("../assets/images/Photo_Girl_Registration.png")}
-                />
-              ) : null}
-              <Pressable style={styles.addBtn}>
+          <ImageBackground
+            resizeMode="cover"
+            style={[styles.imageBG, { height }]}
+            source={require("../assets/images/PhotoBG.png")}
+          >
+            <View style={styles.contentContainer}>
+              <View style={styles.photoContainer}>
                 {photo ? (
-                  <Image source={require("../assets/icons/cancel.png")} />
-                ) : (
-                  <Image source={require("../assets/icons/add.png")} />
-                )}
-              </Pressable>
-            </View>
+                  <ImageBackground
+                    style={{ width: "100%", height: "100%" }}
+                    source={require("../assets/images/Photo_Girl_Registration.png")}
+                  />
+                ) : null}
+                <Pressable style={styles.addBtn}>
+                  {photo ? (
+                    <Image source={require("../assets/icons/cancel.png")} />
+                  ) : (
+                    <Image source={require("../assets/icons/add.png")} />
+                  )}
+                </Pressable>
+              </View>
 
-            <RegistrationForm />
-          </View>
-        </ImageBackground>
+              <RegistrationForm />
+            </View>
+          </ImageBackground>
+        </KeyboardAvoidingView>
       </TouchableWithoutFeedback>
     </SafeAreaView>
   );

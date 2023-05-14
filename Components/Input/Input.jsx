@@ -1,11 +1,5 @@
 import { useCallback, useState } from "react";
-import {
-  TextInput,
-  StyleSheet,
-  Pressable,
-  Text,
-  KeyboardAvoidingView,
-} from "react-native";
+import { TextInput, StyleSheet, Pressable, Text, View } from "react-native";
 
 export const Input = ({
   value,
@@ -22,42 +16,42 @@ export const Input = ({
   const showPassword = useCallback(() => setShowPass(!showPass), [showPass]);
 
   return (
-    <>
-      <KeyboardAvoidingView
-        behavior={Platform.OS == "ios" ? "padding" : undefined}
-      >
-        <TextInput
-          style={[
-            { ...style },
-            password && { paddingRight: 100 },
-            focus && { borderColor: "#FF6C00" },
-          ]}
-          placeholder={placeholder}
-          onChangeText={(v) => onChange(v)}
-          value={value}
-          secureTextEntry={showPass}
-          onFocus={onFocus}
-          onBlur={onBlur}
-        />
+    <View style={styles.container}>
+      <TextInput
+        style={[
+          { ...style },
+          password && { paddingRight: 100 },
+          focus && { borderColor: "#FF6C00" },
+        ]}
+        placeholder={placeholder}
+        onChangeText={(v) => onChange(v)}
+        value={value}
+        secureTextEntry={showPass}
+        onFocus={onFocus}
+        onBlur={onBlur}
+      />
 
-        {password && (
-          <Pressable onPress={showPassword} style={styles.showPassBtn}>
-            <Text style={styles.showPassBtnText}>
-              {showPass ? "Показать" : "Скрыть"}
-            </Text>
-          </Pressable>
-        )}
-      </KeyboardAvoidingView>
-    </>
+      {password && (
+        <Pressable onPress={showPassword} style={styles.showPassBtn}>
+          <Text style={styles.showPassBtnText}>
+            {showPass ? "Показать" : "Скрыть"}
+          </Text>
+        </Pressable>
+      )}
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    position: "relative",
+  },
   showPassBtn: {
     position: "absolute",
-    right: 0,
-    padding: 16,
     height: "100%",
+    right: 0,
+    bottom: 0,
+    padding: 16,
     justifyContent: "center",
   },
   showPassBtnText: {

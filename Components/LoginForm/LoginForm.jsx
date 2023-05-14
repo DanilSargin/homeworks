@@ -8,12 +8,15 @@ import {
   Keyboard,
   Platform,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { Input } from "../Input/Input";
 import { useCallback, useState } from "react";
 
 export const LoginForm = () => {
   const [mail, setMail] = useState(null);
   const [pass, setPass] = useState(null);
+
+  const navigation = useNavigation();
 
   const onLoginHandler = useCallback(() => {
     const user = {
@@ -24,7 +27,7 @@ export const LoginForm = () => {
     setMail(null);
     setPass(null);
 
-    console.log("User: ", user);
+    navigation.navigate("Home", { user });
   }, [mail, pass]);
 
   return (
@@ -60,7 +63,9 @@ export const LoginForm = () => {
             </TouchableHighlight>
             <View style={styles.linkBlock}>
               <Text style={styles.linkBlockText}>Нет аккаунта? </Text>
-              <TouchableHighlight>
+              <TouchableHighlight
+                onPress={() => navigation.navigate("Registration")}
+              >
                 <Text style={styles.linkBlockText}>Зарегистрироваться</Text>
               </TouchableHighlight>
             </View>

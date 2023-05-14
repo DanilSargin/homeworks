@@ -6,6 +6,7 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { Input } from "../Input/Input";
 import { useCallback, useState } from "react";
 
@@ -13,6 +14,8 @@ export const RegistrationForm = () => {
   const [login, setLogin] = useState(null);
   const [mail, setMail] = useState(null);
   const [pass, setPass] = useState(null);
+
+  const navigation = useNavigation();
 
   const onRegistrationHandler = useCallback(() => {
     const user = {
@@ -25,7 +28,7 @@ export const RegistrationForm = () => {
     setMail(null);
     setPass(null);
 
-    console.log("User: ", user);
+    navigation.navigate("Home", { user });
   }, [mail, pass, login]);
 
   return (
@@ -66,7 +69,7 @@ export const RegistrationForm = () => {
           </TouchableHighlight>
           <View style={styles.linkBlock}>
             <Text style={styles.linkBlockText}>Уже есть аккаунт? </Text>
-            <TouchableHighlight>
+            <TouchableHighlight onPress={() => navigation.navigate("Login")}>
               <Text style={styles.linkBlockText}>Войти</Text>
             </TouchableHighlight>
           </View>

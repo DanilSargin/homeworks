@@ -1,5 +1,12 @@
 import { useCallback, useState } from "react";
-import { TextInput, StyleSheet, Pressable, Text, View } from "react-native";
+import {
+  TextInput,
+  StyleSheet,
+  Pressable,
+  Text,
+  View,
+  Image,
+} from "react-native";
 
 export const Input = ({
   value,
@@ -7,6 +14,8 @@ export const Input = ({
   style,
   placeholder,
   onChange,
+  withIcon = false,
+  icon,
 }) => {
   const [showPass, setShowPass] = useState(password);
   const [focus, setFocus] = useState(false);
@@ -18,8 +27,10 @@ export const Input = ({
   return (
     <View style={styles.container}>
       <TextInput
+        numberOfLines={1}
         style={[
           { ...style },
+          withIcon && { paddingLeft: 28 },
           password && { paddingRight: 100 },
           focus && { borderColor: "#FF6C00" },
         ]}
@@ -30,6 +41,12 @@ export const Input = ({
         onFocus={onFocus}
         onBlur={onBlur}
       />
+
+      {withIcon && (
+        <View style={styles.iconContainer}>
+          <Image source={icon} />
+        </View>
+      )}
 
       {password && (
         <Pressable onPress={showPassword} style={styles.showPassBtn}>
@@ -58,5 +75,10 @@ const styles = StyleSheet.create({
     color: "#1B4371",
     fontSize: 16,
     lineHeight: 19,
+  },
+  iconContainer: {
+    position: "absolute",
+    height: "100%",
+    justifyContent: "center",
   },
 });

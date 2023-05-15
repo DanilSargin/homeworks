@@ -16,8 +16,9 @@ export const TabsNavigation = () => {
     <Tabs.Navigator
       initialRouteName="Публикации"
       screenOptions={{
+        headerTitleAlign: "center",
         headerLeft: () => (
-          <Pressable onPress={() => navigation.goBack()}>
+          <Pressable onPress={() => navigation.navigate("Публикации")}>
             <Text>Hello</Text>
           </Pressable>
         ),

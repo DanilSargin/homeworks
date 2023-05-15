@@ -11,6 +11,7 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import { Input } from "../Input/Input";
 import { useCallback, useState } from "react";
+import { Button } from "../Button/Button";
 
 export const LoginForm = () => {
   const [mail, setMail] = useState(null);
@@ -55,12 +56,17 @@ export const LoginForm = () => {
           </View>
 
           <View style={styles.footerContainer}>
-            <TouchableHighlight
+            {/* <TouchableHighlight
               style={styles.acceptBtn}
               onPress={onLoginHandler}
             >
               <Text style={styles.acceptBtnText}>Войти</Text>
-            </TouchableHighlight>
+            </TouchableHighlight> */}
+            <Button
+              title="Войти"
+              onPress={onLoginHandler}
+              style={styles.acceptBtn}
+            />
             <View style={styles.linkBlock}>
               <Text style={styles.linkBlockText}>Нет аккаунта? </Text>
               <TouchableHighlight
@@ -121,11 +127,6 @@ const styles = StyleSheet.create({
   },
   acceptBtn: {
     marginTop: 43,
-    width: "100%",
-    borderRadius: 50,
-    backgroundColor: "#FF6C00",
-    padding: 16,
-    alignItems: "center",
   },
   acceptBtnText: {
     color: "#FFFFFF",

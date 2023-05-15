@@ -21,22 +21,19 @@ export default function App() {
   return (
     <>
       <NavigationContainer>
-        <NavigationStack.Navigator initialRouteName="Login">
+        <NavigationStack.Navigator
+          initialRouteName="Login"
+          screenOptions={{ headerShown: false }}
+        >
           <NavigationStack.Screen
             name="Registration"
             component={RegistrationScreen}
-            options={{ headerShown: false }}
           />
-          <NavigationStack.Screen
-            name="Login"
-            component={LoginScreen}
-            options={{ headerShown: false }}
-          />
+          <NavigationStack.Screen name="Login" component={LoginScreen} />
           <NavigationStack.Screen
             name="Home"
             component={HomeScreen}
             options={{
-              title: "Публикации",
               headerStyle: {
                 backgroundColor: "#FFFFFF",
                 shadowColor: "#000000",

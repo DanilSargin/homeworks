@@ -6,6 +6,8 @@ import { Image, StyleSheet, View, Text, Pressable } from "react-native";
 import { CreatePostsScreen } from "../../Screens/CreatePostsScreen";
 import { ProfileScreen } from "../../Screens/ProfileScreen";
 import { useNavigation } from "@react-navigation/native";
+import { LogOut } from "../LogOut/Logout";
+import { GoBack } from "../GoBack/GoBack";
 
 export const TabsNavigation = () => {
   const Tabs = createBottomTabNavigator();
@@ -17,11 +19,7 @@ export const TabsNavigation = () => {
       initialRouteName="Публикации"
       screenOptions={{
         headerTitleAlign: "center",
-        headerLeft: () => (
-          <Pressable onPress={() => navigation.navigate("Публикации")}>
-            <Text>Hello</Text>
-          </Pressable>
-        ),
+
         tabBarShowLabel: false,
         tabBarStyle: {
           height: 80,
@@ -33,6 +31,9 @@ export const TabsNavigation = () => {
           width: 70,
           marginTop: 9,
         },
+        headerStyle: {
+          height: 88,
+        },
       }}
     >
       <Tabs.Screen
@@ -42,6 +43,7 @@ export const TabsNavigation = () => {
           tabBarIcon: () => (
             <Image source={require("../../assets/icons/grid.png")} />
           ),
+          headerRight: () => <LogOut />,
         }}
       />
       <Tabs.Screen
@@ -53,6 +55,7 @@ export const TabsNavigation = () => {
               <Image source={require("../../assets/icons/plus.png")} />
             </View>
           ),
+          headerLeft: () => <GoBack />,
         }}
       />
       <Tabs.Screen
@@ -62,6 +65,7 @@ export const TabsNavigation = () => {
           tabBarIcon: () => (
             <Image source={require("../../assets/icons/user.png")} />
           ),
+          headerShown: false,
         }}
       />
     </Tabs.Navigator>

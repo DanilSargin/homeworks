@@ -13,6 +13,7 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import { RegistrationForm } from "../Components/RegistrationForm/RegistrationForm";
 import { useState } from "react";
+import { UserProfileAvatar } from "../Components/UserProfileAvatar/UserProfileAvatar";
 
 export const RegistrationScreen = () => {
   const [photo, setPhoto] = useState(null); // change on true, and look at photo
@@ -31,21 +32,7 @@ export const RegistrationScreen = () => {
             source={require("../assets/images/PhotoBG.png")}
           >
             <View style={styles.contentContainer}>
-              <View style={styles.photoContainer}>
-                {photo ? (
-                  <ImageBackground
-                    style={{ width: "100%", height: "100%" }}
-                    source={require("../assets/images/Photo_Girl_Registration.png")}
-                  />
-                ) : null}
-                <Pressable style={styles.addBtn}>
-                  {photo ? (
-                    <Image source={require("../assets/icons/cancel.png")} />
-                  ) : (
-                    <Image source={require("../assets/icons/add.png")} />
-                  )}
-                </Pressable>
-              </View>
+              <UserProfileAvatar photo={photo} />
 
               <RegistrationForm />
             </View>

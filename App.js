@@ -6,6 +6,9 @@ import "react-native-gesture-handler";
 import { LoginScreen } from "./Screens/LoginScreen";
 import { HomeScreen } from "./Screens/Home";
 import { LogOut } from "./Components/LogOut/Logout";
+import { MapScreen } from "./Screens/MapScreen";
+import { CommentsScreen } from "./Screens/CommentsScreen";
+import { GoBack } from "./Components/GoBack/GoBack";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -23,7 +26,7 @@ export default function App() {
       <NavigationContainer>
         <NavigationStack.Navigator
           initialRouteName="Login"
-          screenOptions={{ headerShown: false }}
+          // screenOptions={{ headerShown: false }}
         >
           <NavigationStack.Screen
             name="Registration"
@@ -34,22 +37,55 @@ export default function App() {
             name="Home"
             component={HomeScreen}
             options={{
-              headerStyle: {
-                backgroundColor: "#FFFFFF",
-                shadowColor: "#000000",
-                shadowOpacity: 0.3,
-                shadowOffset: {
-                  height: 0.5,
-                },
-              },
+              headerShown: false,
+            }}
+            // options={{
+            //   headerStyle: {
+            //     backgroundColor: "#FFFFFF",
+            //     shadowColor: "#000000",
+            //     shadowOpacity: 0.3,
+            //     shadowOffset: {
+            //       height: 0.5,
+            //     },
+            //   },
+            //   headerTitleAlign: "center",
+            //   headerTintColor: "#212121",
+            //   headerTitleStyle: {
+            //     fontFamily: "Roboto-medium",
+            //     fontSize: 17,
+            //   },
+            //   headerLeft: null,
+            //   headerRight: () => <LogOut />,
+            // }}
+          />
+          <NavigationStack.Screen
+            name="Map"
+            component={MapScreen}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <NavigationStack.Screen
+            name="Комментарии"
+            component={CommentsScreen}
+            options={{
               headerTitleAlign: "center",
-              headerTintColor: "#212121",
-              headerTitleStyle: {
-                fontFamily: "Roboto-medium",
-                fontSize: 17,
+
+              tabBarShowLabel: false,
+              tabBarStyle: {
+                height: 80,
+                paddingHorizontal: 50,
               },
-              headerLeft: null,
-              headerRight: () => <LogOut />,
+              tabBarItemStyle: {
+                borderRadius: 30,
+                height: 40,
+                width: 70,
+                marginTop: 9,
+              },
+              headerStyle: {
+                height: 88,
+              },
+              headerLeft: () => <GoBack />,
             }}
           />
         </NavigationStack.Navigator>

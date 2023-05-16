@@ -18,7 +18,6 @@ export const CameraBox = () => {
         const photo = await cameraRef.current.takePictureAsync();
         setPicture(photo.uri);
         await MediaLibrary.saveToLibraryAsync(photo.uri);
-        console.log("Photo saved to gallery", photo);
       } catch (error) {
         console.log("Error taking photo: ", error);
       }

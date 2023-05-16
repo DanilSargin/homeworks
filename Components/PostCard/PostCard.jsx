@@ -1,6 +1,22 @@
-import { View, Image, Text, StyleSheet } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import {
+  View,
+  Image,
+  Text,
+  StyleSheet,
+  TouchableHighlight,
+} from "react-native";
 
-export const PostCard = ({ photo, comments, likes, tittle, location }) => {
+export const PostCard = ({
+  photo,
+  comments,
+  likes,
+  tittle,
+  location,
+  geoCoords,
+}) => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       <Image resizeMode="cover" style={styles.image} source={{ uri: photo }} />
@@ -8,18 +24,39 @@ export const PostCard = ({ photo, comments, likes, tittle, location }) => {
         <Text style={styles.title}>{tittle}</Text>
         <View style={styles.bottomLine}>
           <View style={styles.countersBlock}>
-            <View style={styles.contentsBlock}>
-              <Image source={require("../../assets/icons/comments.png")} />
-              <Text>{comments}</Text>
-            </View>
+            <TouchableHighlight
+              onPress={() => navigation.navigate("Комментарии")}
+            >
+              <View style={styles.contentsBlock}>
+                <Image source={require("../../assets/icons/comments.png")} />
+                <Text>{comments}</Text>
+              </View>
+            </TouchableHighlight>
             <View style={styles.contentsBlock}>
               <Image source={require("../../assets/icons/thumbs-up.png")} />
               <Text>{likes}</Text>
             </View>
           </View>
           <View style={styles.contentsBlock}>
-            <Image source={require("../../assets/icons/map-pin.png")} />
-            <Text style={styles.locationText}>{location}</Text>
+            <TouchableHighlight
+              onPress={
+                geoCoords
+                  ? () => navigation.navigate("Map", { geoCoords })
+                  : null
+              }
+            >
+              <View style={styles.contentsBlock}>
+                <Image source={require("../../assets/icons/map-pin.png")} />
+                <Text
+                  style={[
+                    styles.locationText,
+                    !geoCoords && { textDecorationLine: "none" },
+                  ]}
+                >
+                  {location}
+                </Text>
+              </View>
+            </TouchableHighlight>
           </View>
         </View>
       </View>

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { View, Image, Text, StyleSheet, ScrollView } from "react-native";
 import { PostCard } from "../Components/PostCard/PostCard";
-import { useFocusEffect } from "@react-navigation/native";
 
 export const PostsScreen = ({ route }) => {
   const [posts, setPosts] = useState([]);
@@ -12,8 +11,6 @@ export const PostsScreen = ({ route }) => {
       setPosts((prev) => [...prev, { ...newPost, comments: 0, likes: 0 }]);
     }
   }, [route]);
-
-  console.log("++", posts);
 
   return (
     <View style={styles.container}>
@@ -42,6 +39,7 @@ export const PostsScreen = ({ route }) => {
             comments={post.comments}
             likes={post.likes}
             location={post.location}
+            geoCoords={post.geoPoint}
           />
         ))}
       </ScrollView>

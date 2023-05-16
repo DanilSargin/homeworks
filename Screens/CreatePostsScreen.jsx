@@ -54,6 +54,8 @@ export const CreatePostsScreen = () => {
     []
   );
 
+  //FIXME: Don't get camera-white.png icon on photoBox
+
   const photoBox = useMemo(
     () => (
       <View style={styles.photoContainer}>
@@ -65,7 +67,7 @@ export const CreatePostsScreen = () => {
             { position: "absolute" },
           ]}
         >
-          <Image source={require("../assets/icons/camera-white.png")} />
+          <Image source={require("../assets/icons/camera.png")} />
         </TouchableHighlight>
       </View>
     ),

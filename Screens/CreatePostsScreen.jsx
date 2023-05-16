@@ -1,40 +1,102 @@
-import { View, Text, StyleSheet, Image, TextInput } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TextInput,
+  ScrollView,
+  TouchableWithoutFeedback,
+  TouchableHighlight,
+  Keyboard,
+  ImageBackground,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Input } from "../Components/Input/Input";
 import { Button } from "../Components/Button/Button";
-import { useState } from "react";
+import { useState, useRef, useMemo, useCallback } from "react";
+import { Camera, CameraType } from "expo-camera";
+import * as MediaLibrary from "expo-media-library";
 
 export const CreatePostsScreen = () => {
   const [image, setImage] = useState(null);
   const [imageTitle, setImageTitle] = useState(null);
   const [location, setLocation] = useState(null);
 
-  return (
-    <SafeAreaView style={styles.container}>
+  const [type, setType] = useState(CameraType.back);
+
+  const cameraRef = useRef(null);
+
+  const takePhoto = useCallback(async () => {
+    if (cameraRef.current) {
+      try {
+        const photo = await cameraRef.current.takePictureAsync();
+        setImage(photo.uri);
+        await MediaLibrary.saveToLibraryAsync(photo.uri);
+      } catch (error) {
+        console.log("Error taking photo: ", error);
+      }
+    }
+  }, []);
+
+  const camera = useMemo(
+    () => (
       <View style={styles.photoContainer}>
-        <View style={styles.cameraIconContainer}>
-          <Image source={require("../assets/icons/camera.png")} />
-        </View>
+        <Camera style={[styles.photoContainer]} type={type} ref={cameraRef}>
+          <TouchableHighlight
+            onPress={takePhoto}
+            style={styles.cameraIconContainer}
+          >
+            <Image source={require("../assets/icons/camera.png")} />
+          </TouchableHighlight>
+        </Camera>
       </View>
+    ),
+    []
+  );
 
-      <Text style={styles.text}>Загрузите фото</Text>
-      <Input
-        style={styles.nameInput}
-        placeholder="Название..."
-        value={imageTitle}
-        onChange={setImageTitle}
-      />
-      <Input
-        withIcon
-        icon={require("../assets/icons/map-pin.png")}
-        style={styles.locationInput}
-        placeholder="Местность..."
-        value={location}
-        onChange={setLocation}
-      />
+  const photoBox = useMemo(
+    () => (
+      <View style={styles.photoContainer}>
+        <Image source={{ uri: image }} style={styles.photoImage} />
+        <TouchableHighlight
+          onPress={() => setImage(null)}
+          style={[styles.cameraIconContainer, { position: "absolute" }]}
+        >
+          <Image source={require("../assets/icons/camera.png")} />
+        </TouchableHighlight>
+      </View>
+    ),
+    [image]
+  );
 
-      <Button title="Опубликовать" disabled style={{ marginTop: 32 }} />
-    </SafeAreaView>
+  return (
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss()}>
+      <SafeAreaView style={styles.container}>
+        {image ? photoBox : camera}
+
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <Text style={styles.text}>
+            {image ? "Редактировать фото" : "Загрузите фото"}
+          </Text>
+          <Input
+            style={styles.nameInput}
+            placeholder="Название..."
+            value={imageTitle}
+            onChange={setImageTitle}
+          />
+          <Input
+            withIcon
+            icon={require("../assets/icons/map-pin.png")}
+            style={styles.locationInput}
+            placeholder="Местность..."
+            value={location}
+            onChange={setLocation}
+          />
+
+          <Button title="Опубликовать" disabled style={{ marginTop: 32 }} />
+        </ScrollView>
+      </SafeAreaView>
+    </TouchableWithoutFeedback>
   );
 };
 
@@ -53,6 +115,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     justifyContent: "center",
     alignItems: "center",
+    overflow: "hidden",
   },
   cameraIconContainer: {
     padding: 18,
@@ -85,5 +148,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 19,
     color: "#BDBDBD",
+  },
+  photoImage: {
+    width: "100%",
+    height: "100%",
+    borderRadius: 8,
   },
 });

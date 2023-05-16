@@ -31,8 +31,17 @@ export default function App() {
           <NavigationStack.Screen
             name="Registration"
             component={RegistrationScreen}
+            options={{
+              headerShown: false,
+            }}
           />
-          <NavigationStack.Screen name="Login" component={LoginScreen} />
+          <NavigationStack.Screen
+            name="Login"
+            component={LoginScreen}
+            options={{
+              headerShown: false,
+            }}
+          />
           <NavigationStack.Screen
             name="Home"
             component={HomeScreen}

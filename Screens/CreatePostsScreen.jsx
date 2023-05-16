@@ -36,7 +36,6 @@ export const CreatePostsScreen = () => {
       const geoRequest = await Location.requestForegroundPermissionsAsync();
 
       if (geoRequest.status === "granted") {
-        setGeoRequest(true);
         const location = await Location.getCurrentPositionAsync({});
         const coords = {
           latitude: location.coords.latitude,

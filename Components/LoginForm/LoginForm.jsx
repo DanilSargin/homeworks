@@ -1,17 +1,8 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableHighlight,
-  TouchableWithoutFeedback,
-  KeyboardAvoidingView,
-  Keyboard,
-  Platform,
-} from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { Input } from "../Input/Input";
 import { useCallback, useState } from "react";
 
-export const LoginForm = () => {
+export const LoginForm = ({ onChangeMode }) => {
   const [mail, setMail] = useState(null);
   const [pass, setPass] = useState(null);
 
@@ -28,46 +19,37 @@ export const LoginForm = () => {
   }, [mail, pass]);
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View style={styles.container}>
-        <KeyboardAvoidingView
-          behavior={Platform.OS == "ios" ? "padding" : undefined}
-        >
-          <Text style={styles.headertext}>Войти</Text>
+    <View style={styles.container}>
+      <Text style={styles.headertext}>Войти</Text>
 
-          <View style={styles.inputContainer}>
-            <Input
-              placeholder="Адрес электронной почты"
-              style={styles.input}
-              value={mail}
-              onChange={setMail}
-            />
-            <Input
-              placeholder="Пароль"
-              style={styles.input}
-              value={pass}
-              onChange={setPass}
-              password={true}
-            />
-          </View>
-
-          <View style={styles.footerContainer}>
-            <TouchableHighlight
-              style={styles.acceptBtn}
-              onPress={onLoginHandler}
-            >
-              <Text style={styles.acceptBtnText}>Войти</Text>
-            </TouchableHighlight>
-            <View style={styles.linkBlock}>
-              <Text style={styles.linkBlockText}>Нет аккаунта? </Text>
-              <TouchableHighlight>
-                <Text style={styles.linkBlockText}>Зарегистрироваться</Text>
-              </TouchableHighlight>
-            </View>
-          </View>
-        </KeyboardAvoidingView>
+      <View style={styles.inputContainer}>
+        <Input
+          placeholder="Адрес электронной почты"
+          style={styles.input}
+          value={mail}
+          onChange={setMail}
+        />
+        <Input
+          placeholder="Пароль"
+          style={styles.input}
+          value={pass}
+          onChange={setPass}
+          password={true}
+        />
       </View>
-    </TouchableWithoutFeedback>
+
+      <View style={styles.footerContainer}>
+        <TouchableOpacity style={styles.acceptBtn} onPress={onLoginHandler}>
+          <Text style={styles.acceptBtnText}>Войти</Text>
+        </TouchableOpacity>
+        <View style={styles.linkBlock}>
+          <Text style={styles.linkBlockText}>Нет аккаунта? </Text>
+          <TouchableOpacity onPress={onChangeMode}>
+            <Text style={styles.linkBlockText}>Зарегистрироваться</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </View>
   );
 };
 
@@ -80,6 +62,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
   },
   headertext: {
+    marginTop: 32,
     fontSize: 30,
     fontFamily: "Roboto-medium",
     lineHeight: 35,

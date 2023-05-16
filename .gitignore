@@ -3,6 +3,7 @@ node_modules/
 dist/
 assets/fonts/Roboto/LICENSE.txt
 npm-debug.*
+.history
 *.jks
 *.p8
 *.p12

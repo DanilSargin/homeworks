@@ -11,10 +11,5 @@ export default function App() {
 
   if (!fontsLoaded) return null;
 
-  return (
-    <>
-      <RegistrationScreen />
-      {/* <LoginScreen /> */}
-    </>
-  );
+  return <RegistrationScreen />;
 }

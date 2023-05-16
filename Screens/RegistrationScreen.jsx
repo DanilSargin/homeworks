@@ -12,46 +12,63 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { RegistrationForm } from "../Components/RegistrationForm/RegistrationForm";
-import { useState } from "react";
+import { useCallback, useState } from "react";
+import { LoginForm } from "../Components/LoginForm/LoginForm";
 
 export const RegistrationScreen = () => {
-  const [photo, setPhoto] = useState(null); // change on true, and look at photo
+  const [photo] = useState(null); // change on true, and look at photo
 
   const { height } = useWindowDimensions();
+
+  const [mode, setMode] = useState("SIGN_UP");
+
+  const onChangeMode = useCallback(() => {
+    if (mode === "SIGN_UP") {
+      setMode("SIGN_IN");
+    } else {
+      setMode("SIGN_UP");
+    }
+  }, [mode]);
+
   return (
     <SafeAreaView style={styles.container}>
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <KeyboardAvoidingView
-          style={{ flex: 1 }}
-          behavior={Platform.OS == "ios" ? "padding" : undefined}
-        >
-          <ImageBackground
-            resizeMode="cover"
-            style={[styles.imageBG, { height }]}
-            source={require("../assets/images/PhotoBG.png")}
+      <ImageBackground
+        resizeMode="cover"
+        style={[styles.imageBG, { height }]}
+        source={require("../assets/images/PhotoBG.png")}
+      >
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <KeyboardAvoidingView
+            style={styles.keyboardViewContainer}
+            behavior={Platform.OS == "ios" ? "padding" : undefined}
           >
             <View style={styles.contentContainer}>
-              <View style={styles.photoContainer}>
-                {photo ? (
-                  <ImageBackground
-                    style={{ width: "100%", height: "100%" }}
-                    source={require("../assets/images/Photo_Girl_Registration.png")}
-                  />
-                ) : null}
-                <Pressable style={styles.addBtn}>
-                  {photo ? (
-                    <Image source={require("../assets/icons/cancel.png")} />
-                  ) : (
-                    <Image source={require("../assets/icons/add.png")} />
-                  )}
-                </Pressable>
-              </View>
-
-              <RegistrationForm />
+              {mode === "SIGN_UP" ? (
+                <>
+                  <View style={styles.photoContainer}>
+                    {photo ? (
+                      <Image
+                        source={require("../assets/images/Photo_Girl_Registration.png")}
+                        style={styles.photo}
+                      />
+                    ) : null}
+                    <Pressable style={styles.addBtn}>
+                      {photo ? (
+                        <Image source={require("../assets/icons/cancel.png")} />
+                      ) : (
+                        <Image source={require("../assets/icons/add.png")} />
+                      )}
+                    </Pressable>
+                  </View>
+                  <RegistrationForm onChangeMode={onChangeMode} />
+                </>
+              ) : (
+                <LoginForm onChangeMode={onChangeMode} />
+              )}
             </View>
-          </ImageBackground>
-        </KeyboardAvoidingView>
-      </TouchableWithoutFeedback>
+          </KeyboardAvoidingView>
+        </TouchableWithoutFeedback>
+      </ImageBackground>
     </SafeAreaView>
   );
 };
@@ -59,6 +76,10 @@ export const RegistrationScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  keyboardViewContainer: {
+    flex: 1,
+    justifyContent: "flex-end",
   },
   imageBG: {
     position: "absolute",
@@ -72,16 +93,20 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 25,
     alignItems: "center",
     paddingHorizontal: 16,
-    paddingTop: 92,
     paddingBottom: 78,
   },
   photoContainer: {
+    backgroundColor: "#F6F6F6",
+    marginTop: -70,
+    marginBottom: 32,
     width: 120,
     height: 120,
     borderRadius: 16,
-    backgroundColor: "#F6F6F6",
-    position: "absolute",
-    top: -60,
+  },
+  photo: {
+    width: 120,
+    height: 120,
+    borderRadius: 16,
   },
   addBtn: {
     width: 25,

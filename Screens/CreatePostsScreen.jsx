@@ -13,18 +13,40 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Input } from "../Components/Input/Input";
 import { Button } from "../Components/Button/Button";
-import { useState, useRef, useMemo, useCallback } from "react";
+import { useState, useRef, useMemo, useCallback, useEffect } from "react";
 import { Camera, CameraType } from "expo-camera";
 import * as MediaLibrary from "expo-media-library";
+import { useNavigation } from "@react-navigation/native";
+import * as Location from "expo-location";
 
 export const CreatePostsScreen = () => {
   const [image, setImage] = useState(null);
   const [imageTitle, setImageTitle] = useState(null);
   const [location, setLocation] = useState(null);
+  const [geo, setGeo] = useState(null);
 
   const [type, setType] = useState(CameraType.back);
 
   const cameraRef = useRef(null);
+
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    const getLocation = async () => {
+      const geoRequest = await Location.requestForegroundPermissionsAsync();
+
+      if (geoRequest.status === "granted") {
+        const location = await Location.getCurrentPositionAsync({});
+        const coords = {
+          latitude: location.coords.latitude,
+          longitude: location.coords.longitude,
+        };
+        setGeo(coords);
+      }
+    };
+
+    getLocation();
+  }, []);
 
   const takePhoto = useCallback(async () => {
     if (cameraRef.current) {
@@ -74,6 +96,22 @@ export const CreatePostsScreen = () => {
     [image]
   );
 
+  const addPost = useCallback(() => {
+    const post = {
+      title: imageTitle,
+      location,
+      imageUri: image,
+      geoPoint: geo,
+    };
+
+    setImage(null);
+    setLocation(null);
+    setImageTitle(null);
+    setGeo(null);
+
+    navigation.navigate("Публикации", { post: post });
+  }, [geo, imageTitle, location, image]);
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss()}>
       <SafeAreaView style={styles.container}>
@@ -98,7 +136,12 @@ export const CreatePostsScreen = () => {
             onChange={setLocation}
           />
 
-          <Button title="Опубликовать" disabled style={{ marginTop: 32 }} />
+          <Button
+            onPress={addPost}
+            title="Опубликовать"
+            disabled={!image || !imageTitle || !location}
+            style={{ marginTop: 32 }}
+          />
         </ScrollView>
       </SafeAreaView>
     </TouchableWithoutFeedback>
@@ -147,7 +190,7 @@ const styles = StyleSheet.create({
     fontFamily: "Roboto-regular",
     fontSize: 16,
     lineHeight: 19,
-    color: "#BDBDBD",
+    color: "#212121",
     marginTop: 32,
     marginBottom: 16,
   },
@@ -158,7 +201,7 @@ const styles = StyleSheet.create({
     fontFamily: "Roboto-regular",
     fontSize: 16,
     lineHeight: 19,
-    color: "#BDBDBD",
+    color: "#212121",
   },
   photoImage: {
     width: "100%",

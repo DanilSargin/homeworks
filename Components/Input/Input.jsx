@@ -27,6 +27,7 @@ export const Input = ({
   return (
     <View style={styles.container}>
       <TextInput
+        placeholderTextColor="#BDBDBD"
         numberOfLines={1}
         style={[
           { ...style },

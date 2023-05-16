@@ -3,7 +3,7 @@ import { View, Image, Text, StyleSheet } from "react-native";
 export const PostCard = ({ photo, comments, likes, tittle, location }) => {
   return (
     <View style={styles.container}>
-      <Image resizeMode="cover" style={styles.image} source={photo} />
+      <Image resizeMode="cover" style={styles.image} source={{ uri: photo }} />
       <View style={styles.textContentContainer}>
         <Text style={styles.title}>{tittle}</Text>
         <View style={styles.bottomLine}>
@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   image: {
+    height: 240,
     width: "100%",
     borderRadius: 8,
   },

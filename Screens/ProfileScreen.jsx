@@ -39,29 +39,7 @@ export const ProfileScreen = () => {
         <ScrollView
           showsVerticalScrollIndicator={false}
           style={styles.scrollContainer}
-        >
-          <PostCard
-            photo={image}
-            tittle={title}
-            comments={comments}
-            likes={likes}
-            location={location}
-          />
-          <PostCard
-            photo={image}
-            tittle={title}
-            comments={comments}
-            likes={likes}
-            location={location}
-          />
-          <PostCard
-            photo={image}
-            tittle={title}
-            comments={comments}
-            likes={likes}
-            location={location}
-          />
-        </ScrollView>
+        ></ScrollView>
       </View>
     </SafeAreaView>
   );

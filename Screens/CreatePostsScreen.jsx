@@ -60,9 +60,12 @@ export const CreatePostsScreen = () => {
         <Image source={{ uri: image }} style={styles.photoImage} />
         <TouchableHighlight
           onPress={() => setImage(null)}
-          style={[styles.cameraIconContainer, { position: "absolute" }]}
+          style={[
+            styles.cameraIconContainerWithImage,
+            { position: "absolute" },
+          ]}
         >
-          <Image source={require("../assets/icons/camera.png")} />
+          <Image source={require("../assets/icons/camera-white.png")} />
         </TouchableHighlight>
       </View>
     ),
@@ -121,6 +124,12 @@ const styles = StyleSheet.create({
     padding: 18,
     backgroundColor: "#fff",
     borderRadius: 50,
+  },
+  cameraIconContainerWithImage: {
+    padding: 18,
+    backgroundColor: "#fff",
+    borderRadius: 50,
+    opacity: 0.3,
   },
   text: {
     fontFamily: "Roboto-regular",

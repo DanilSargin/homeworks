@@ -12,10 +12,12 @@ export const Input = ({
   value,
   password = false,
   style,
+  containerStyle,
   placeholder,
   onChange,
   withIcon = false,
   icon,
+  children,
 }) => {
   const [showPass, setShowPass] = useState(password);
   const [focus, setFocus] = useState(false);
@@ -25,7 +27,7 @@ export const Input = ({
   const showPassword = useCallback(() => setShowPass(!showPass), [showPass]);
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, containerStyle]}>
       <TextInput
         placeholderTextColor="#BDBDBD"
         numberOfLines={1}
@@ -56,6 +58,8 @@ export const Input = ({
           </Text>
         </Pressable>
       )}
+
+      {children}
     </View>
   );
 };

@@ -10,17 +10,10 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useState } from "react";
 import { UserProfileAvatar } from "../Components/UserProfileAvatar/UserProfileAvatar";
 import { LogOut } from "../Components/LogOut/Logout";
-import { PostCard } from "../Components/PostCard/PostCard";
 
 export const ProfileScreen = () => {
   const [userPhoto, setUserPhoto] = useState(null);
   const { height } = useWindowDimensions();
-
-  const title = "Title post";
-  const image = require("../assets/images/photoPost.png");
-  const comments = 42;
-  const likes = 146;
-  const location = "Ukraine";
 
   return (
     <SafeAreaView style={styles.container}>

@@ -1,5 +1,5 @@
 import { View, Image, StyleSheet, TouchableHighlight } from "react-native";
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import { Camera, CameraType } from "expo-camera";
 import * as MediaLibrary from "expo-media-library";
 
@@ -57,7 +57,6 @@ const styles = StyleSheet.create({
   photoContainer: {
     width: "100%",
     height: 240,
-    // backgroundColor: "#F6F6F6",
     borderColor: "#E8E8E8",
     borderWidth: 1,
     borderRadius: 8,

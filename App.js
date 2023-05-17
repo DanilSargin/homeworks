@@ -30,28 +30,7 @@ export default function App() {
             component={RegistrationScreen}
           />
           <NavigationStack.Screen name="Login" component={LoginScreen} />
-          <NavigationStack.Screen
-            name="Home"
-            component={HomeScreen}
-            options={{
-              headerStyle: {
-                backgroundColor: "#FFFFFF",
-                shadowColor: "#000000",
-                shadowOpacity: 0.3,
-                shadowOffset: {
-                  height: 0.5,
-                },
-              },
-              headerTitleAlign: "center",
-              headerTintColor: "#212121",
-              headerTitleStyle: {
-                fontFamily: "Roboto-medium",
-                fontSize: 17,
-              },
-              headerLeft: null,
-              headerRight: () => <LogOut />,
-            }}
-          />
+          <NavigationStack.Screen name="Home" component={HomeScreen} />
         </NavigationStack.Navigator>
       </NavigationContainer>
     </>

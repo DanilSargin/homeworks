@@ -1,9 +1,7 @@
 import {
   StyleSheet,
-  Image,
   View,
   ImageBackground,
-  Pressable,
   Keyboard,
   TouchableWithoutFeedback,
   useWindowDimensions,

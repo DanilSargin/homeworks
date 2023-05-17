@@ -12,9 +12,9 @@ export const PostsScreen = ({ photo, login, mail }) => {
         />
         <View>
           <Text style={styles.loginText} numberOfLines={1}>
-            {login || "Нет информации"}
+            {login || "Natali Romanova"}
           </Text>
-          <Text style={styles.mailtext}>{mail || "Нет информации"}</Text>
+          <Text style={styles.mailtext}>{mail || "email@example.com"}</Text>
         </View>
       </View>
     </View>

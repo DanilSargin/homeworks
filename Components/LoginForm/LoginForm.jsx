@@ -56,12 +56,6 @@ export const LoginForm = () => {
           </View>
 
           <View style={styles.footerContainer}>
-            {/* <TouchableHighlight
-              style={styles.acceptBtn}
-              onPress={onLoginHandler}
-            >
-              <Text style={styles.acceptBtnText}>Войти</Text>
-            </TouchableHighlight> */}
             <Button
               title="Войти"
               onPress={onLoginHandler}

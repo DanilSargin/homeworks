@@ -1,6 +1,4 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { LoginScreen } from "../../Screens/LoginScreen";
-import { RegistrationScreen } from "../../Screens/RegistrationScreen";
 import { PostsScreen } from "../../Screens/PostsScreen";
 import { Image, StyleSheet, View, Text, Pressable } from "react-native";
 import { CreatePostsScreen } from "../../Screens/CreatePostsScreen";
@@ -11,8 +9,6 @@ import { GoBack } from "../GoBack/GoBack";
 
 export const TabsNavigation = () => {
   const Tabs = createBottomTabNavigator();
-
-  const navigation = useNavigation();
 
   return (
     <Tabs.Navigator
